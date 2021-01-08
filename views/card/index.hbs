@@ -1,0 +1,72 @@
+{{> navbar}}
+
+<div class="container">
+    <div class="row my-4">
+        <div class="col-sm-12">
+            <form class="form-inline my-lg-0">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control mx-3 mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3 ml-0">
+            <div class="card" style="width: 16rem;">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Filter</h5>
+                    <select class="form-control form-control-sm rounded-0 my-2">
+                        <option>Small select</option>
+                    </select>
+                    <select class="form-control form-control-sm rounded-0 my-2">
+                        <option>Small select</option>
+                    </select>
+                    <select class="form-control form-control-sm rounded-0 my-2">
+                        <option>Small select</option>
+                    </select>
+                    <select class="form-control form-control-sm rounded-0 my-2">
+                        <option>Small select</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <h5>Cards</h5>
+                    <a type="button" class="btn btn-success text-white" href="/card/add">
+                        <i class="fa fa-plus-square mr-2 fa-lg" aria-hidden="true"></i>
+                        Add Card
+                    </a>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Sold</th>
+                            <th scope="col">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each this.card}}
+                        <tr>
+                            <th scope="row">{{name}}</th>
+                            <td>{{price}} $</td>
+                            <td>{{sold}}</td>
+                            <td class="text-right">
+                                <a class="btn btn-primary btn-sm" href="#" role="button">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </a>
+                                <a class="btn btn-danger btn-sm" href="#" role="button">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
