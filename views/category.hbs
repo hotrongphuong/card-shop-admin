@@ -5,93 +5,98 @@
         <div class="col-sm-3">
             <div class="card border-secondary mb-3" style="max-width: 28rem">
                 <div class="card-header text-center h5">Categories</div>
-                    <div class="card-body text-secondary">
-                        <div class="list-group border-0" id="list-tab" role="tablist">
-                            <a class="border-0 list-group-item list-group-item-action active" id="list-attribute-list" 
-                                data-toggle="list" href="#list-attribute" role="tab" aria-controls="attribute">Monster attribute</a>
-                            <a class="border-0 list-group-item list-group-item-action" id="list-types-list" 
-                                data-toggle="list" href="#list-types" role="tab" aria-controls="types">Monster type</a>
-                            <a class="border-0 list-group-item list-group-item-action" id="list-races-list" 
-                                data-toggle="list" href="#list-races" role="tab" aria-controls="races">Monster race</a>
-                            <a class="border-0 list-group-item list-group-item-action" id="list-owner-list" 
-                                data-toggle="list" href="#list-owner" role="tab" aria-controls="owner">Deck Figure</a>
-                        </div>
+                <div class="card-body text-secondary">
+                    <div class="list-group border-0" id="list-tab" role="tablist">
+                        <a class="border-0 list-group-item list-group-item-action active" id="list-cardType-list"
+                            data-toggle="list" href="#list-cardType" role="tab" aria-controls="cardType">Card type</a>
+                        <a class="border-0 list-group-item list-group-item-action" id="list-attribute-list"
+                            data-toggle="list" href="#list-attribute" role="tab" aria-controls="attribute">Attribute</a>
+                        <a class="border-0 list-group-item list-group-item-action" id="list-type-list"
+                            data-toggle="list" href="#list-type" role="tab" aria-controls="type">Type</a>
+                    </div>
                 </div>
-            </div>      
+            </div>
         </div>
-
         <div class="col-sm-9">
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="list-attribute" role="tabpanel" aria-labelledby="list-attribute-list">
+                <div class="tab-pane fade show active" id="list-cardType" role="tabpanel"
+                    aria-labelledby="list-cardType-list">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
-                            <h5>Monster attribute</h5>
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#attributeModal">
-                                <i class="fa fa-plus-square mr-2 fa-lg" aria-hidden="true"></i> Add Monster Attribute
+                            <h5>Card Type</h5>
+                            <button type="button" class="btn btn-success" data-toggle="modal"
+                                data-target="#cardTypeModal">
+                                <i class="fa fa-plus-square mr-2 fa-lg" aria-hidden="true"></i> Add Card Type
                             </button>
-                        </div>  
+                        </div>
                         <div class="card-body">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        {{!-- <th scope="col">ID</th> --}}
                                         <th scope="col">Name</th>
                                         <th scope="col">&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{#each this.monsterAttribute}}
-                                        <tr>
-                                            {{!-- <th scope="row">{{_id}}</th> --}}
-                                            <td class="text-capitalize">{{name}}</td>
-                                            <td class="text-right">
-                                                <form action="/category/deleteAttribute/{{_id}}" method="POST" >
-                                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#{{_id}}">
-                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                    </button>
-                                                    <button type="submit" class="btn btn-sm btn-danger">
-                                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                                    </button>
-                                                </form>                                               
-                                                <div class="modal fade" id="{{_id}}" tabindex="-1" role="dialog" aria-labelledby="{{_id}}Label" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title text-primary" id="{{_id}}Label">Edit Monster Attribute</h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action="/category/updateAttribute/{{_id}}" method="POST">
-                                                                    <div class="form-group">
-                                                                        <label for="{{_id}}name">Monster Attribute Name:</label>
-                                                                        <input type="text" name="name" class="form-control" id="{{_id}}name" value="{{name}}">
-                                                                    </div>
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <button type="submit" class="btn btn-primary">Update</button>
-                                                                </form>
-                                                            </div>
+                                    {{#each this.cardType}}
+                                    <tr>
+                                        <td class="text-capitalize">{{name}}</td>
+                                        <td class="text-right">
+                                            <form action="/category/deleteCardType/{{_id}}" method="POST">
+                                                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                                    data-target="#{{_id}}">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                </button>
+                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                            </form>
+                                            <div class="modal fade" id="{{_id}}" tabindex="-1" role="dialog"
+                                                aria-labelledby="{{_id}}Label" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title text-primary" id="{{_id}}Label">Edit Card Type</h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="/category/updateCardType/{{_id}}"
+                                                                method="POST">
+                                                                <div class="form-group">
+                                                                    <label for="{{_id}}name">Card Type Name:</label>
+                                                                    <input type="text" name="name" class="form-control"
+                                                                        id="{{_id}}name" value="{{name}}">
+                                                                </div>
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Update</button>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </td>
-                                        </tr>
+                                            </div>
+                                        </td>
+                                    </tr>
                                     {{/each}}
                                 </tbody>
-                            </table> 
+                            </table>
                             <!-- Modal -->
-                            <div class="modal fade" id="attributeModal" tabindex="-1" role="dialog" aria-labelledby="attributeModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="cardTypeModal" tabindex="-1" role="dialog"
+                                aria-labelledby="cardTypeModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-sm" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title text-success" id="attributeModalLabel">New Monster Attribute</h5>
+                                            <h5 class="modal-title text-success" id="cardTypeModalLabel">New Card Type</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="category/newAttribute" method="POST">
+                                            <form action="category/newCardType" method="POST">
                                                 <div class="form-group">
-                                                    <label for="monsterAttributeName">Monster Attribute Name:</label>
-                                                    <input type="text" name="name" class="form-control" id="monsterAttributeName" value="">
+                                                    <label for="cardTypeName">Card Type Name:</label>
+                                                    <input type="text" name="name" class="form-control"
+                                                        id="cardTypeName" value="">
                                                 </div>
                                                 <button type="submit" class="btn btn-success">Create</button>
                                             </form>
@@ -99,14 +104,101 @@
                                     </div>
                                 </div>
                             </div>
-                              
+
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="list-types" role="tabpanel" aria-labelledby="list-types-list">
+                <div class="tab-pane fade" id="list-attribute" role="tabpanel" aria-labelledby="list-attribute-list">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
-                            <h5>Monster type</h5>
+                            <h5>Attribute</h5>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#attributeModal">
+                                <i class="fa fa-plus-square mr-2 fa-lg" aria-hidden="true"></i> Add Attribute
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each this.attribute}}
+                                    <tr>
+                                        <td class="text-capitalize">{{name}}</td>
+                                        <td class="text-right">
+                                            <form action="/category/deleteAttribute/{{_id}}" method="POST">
+                                                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                                    data-target="#{{_id}}">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                </button>
+                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                            </form>
+                                            <div class="modal fade" id="{{_id}}" tabindex="-1" role="dialog"
+                                                aria-labelledby="{{_id}}Label" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title text-primary" id="{{_id}}Label">Edit
+                                                                Monster Race</h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="/category/updateAttribute/{{_id}}" method="POST">
+                                                                <div class="form-group">
+                                                                    <label for="{{_id}}name">Attribute Name:</label>
+                                                                    <input type="text" name="name" class="form-control"
+                                                                        id="{{_id}}name" value="{{name}}">
+                                                                </div>
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Update</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                            <!-- Modal -->
+                            <div class="modal fade" id="attributeModal" tabindex="-1" role="dialog"
+                                aria-labelledby="attributeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-sm" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="raceModalLabel">New Attribute</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="category/newAttribute" method="POST">
+                                                <div class="form-group">
+                                                    <label for="attributeName">Attribute Name:</label>
+                                                    <input type="text" name="name" class="form-control"
+                                                        id="attributeName">
+                                                </div>
+                                                <button type="submit" class="btn btn-success">Create</button>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="list-type" role="tabpanel" aria-labelledby="list-type-list">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between">
+                            <h5>Type</h5>
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#typeModal">
                                 <i class="fa fa-plus-square mr-2 fa-lg" aria-hidden="true"></i> Add Monster Type
                             </button>
@@ -115,55 +207,59 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        {{!-- <th scope="col">ID</th> --}}
                                         <th scope="col">Name</th>
                                         <th scope="col">&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{#each this.monsterType}}
-                                        <tr>
-                                            {{!-- <th scope="row">{{_id}}</th> --}}
-                                            <td class="text-capitalize">{{name}}</td>
-                                            <td class="text-right">
-                                                <form action="/category/deleteType/{{_id}}" method="POST" >
-                                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#{{_id}}">
-                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                    </button>
-                                                    <button type="submit" class="btn btn-sm btn-danger">
-                                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                                    </button>
-                                                </form>                                               
-                                                <div class="modal fade" id="{{_id}}" tabindex="-1" role="dialog" aria-labelledby="{{_id}}Label" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title text-primary" id="{{_id}}Label">Edit Monster Type</h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action="/category/updateType/{{_id}}" method="POST">
-                                                                    <div class="form-group">
-                                                                        <label for="{{_id}}name">Monster Type Name:</label>
-                                                                        <input type="text" name="name" class="form-control" id="{{_id}}name" value="{{name}}">
-                                                                    </div>
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <button type="submit" class="btn btn-primary">Update</button>
-                                                                </form>
-                                                            </div>
+                                    {{#each this.type}}
+                                    <tr>
+                                        <td class="text-capitalize">{{name}}</td>
+                                        <td class="text-right">
+                                            <form action="/category/deleteType/{{_id}}" method="POST">
+                                                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                                    data-target="#{{_id}}">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                </button>
+                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                            </form>
+                                            <div class="modal fade" id="{{_id}}" tabindex="-1" role="dialog"
+                                                aria-labelledby="{{_id}}Label" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title text-primary" id="{{_id}}Label">Edit Type</h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="/category/updateType/{{_id}}" method="POST">
+                                                                <div class="form-group">
+                                                                    <label for="{{_id}}name">Type Name:</label>
+                                                                    <input type="text" name="name" class="form-control"
+                                                                        id="{{_id}}name" value="{{name}}">
+                                                                </div>
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Update</button>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </td>
-                                        </tr>
+                                            </div>
+                                        </td>
+                                    </tr>
                                     {{/each}}
                                 </tbody>
-                            </table>  
+                            </table>
                             <!-- Modal -->
-                            <div class="modal fade" id="typeModal" tabindex="-1" role="dialog" aria-labelledby="typeModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="typeModal" tabindex="-1" role="dialog"
+                                aria-labelledby="typeModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-sm" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="typeModalLabel">New Monster Type</h5>
+                                            <h5 class="modal-title" id="typeModalLabel">New Type</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -171,8 +267,9 @@
                                         <div class="modal-body">
                                             <form action="category/newType" method="POST">
                                                 <div class="form-group">
-                                                    <label for="monsterTypeName">Monster Type Name:</label>
-                                                    <input type="text" name="name" class="form-control" id="monsterTypeName">
+                                                    <label for="typeName">Type Name:</label>
+                                                    <input type="text" name="name" class="form-control"
+                                                        id="typeName">
                                                 </div>
                                                 <button type="submit" class="btn btn-success">Create</button>
                                             </form>
@@ -183,168 +280,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="list-races" role="tabpanel" aria-labelledby="list-races-list">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between">
-                            <h5>Monster Race</h5>
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#raceModal">
-                                <i class="fa fa-plus-square mr-2 fa-lg" aria-hidden="true"></i> Add Monster Race
-                            </button>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        {{!-- <th scope="col">ID</th> --}}
-                                        <th scope="col">Name</th>
-                                        <th scope="col">&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{#each this.monsterRace}}
-                                        <tr>
-                                            {{!-- <th scope="row">{{_id}}</th> --}}
-                                            <td class="text-capitalize">{{name}}</td>
-                                            <td class="text-right">
-                                                <form action="/category/deleteRace/{{_id}}" method="POST" >
-                                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#{{_id}}">
-                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                    </button>
-                                                    <button type="submit" class="btn btn-sm btn-danger">
-                                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                                    </button>
-                                                </form>                                               
-                                                <div class="modal fade" id="{{_id}}" tabindex="-1" role="dialog" aria-labelledby="{{_id}}Label" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title text-primary" id="{{_id}}Label">Edit Monster Race</h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action="/category/updateRace/{{_id}}" method="POST">
-                                                                    <div class="form-group">
-                                                                        <label for="{{_id}}name">Monster Race Name:</label>
-                                                                        <input type="text" name="name" class="form-control" id="{{_id}}name" value="{{name}}">
-                                                                    </div>
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <button type="submit" class="btn btn-primary">Update</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    {{/each}}
-                                </tbody>
-                            </table>
-                            <!-- Modal -->
-                            <div class="modal fade" id="raceModal" tabindex="-1" role="dialog" aria-labelledby="raceModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-sm" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="raceModalLabel">New Monster Race</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="category/newRace" method="POST">
-                                                <div class="form-group">
-                                                    <label for="monsterRaceName">Monster Race Name:</label>
-                                                    <input type="text" name="name" class="form-control" id="monsterRaceName">
-                                                </div>
-                                                <button type="submit" class="btn btn-success">Create</button>
-                                            </form>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>                        
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="list-owner" role="tabpanel" aria-labelledby="list-owner-list">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between">
-                            <h5>Deck Figure</h5>
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#figureModal">
-                                <i class="fa fa-plus-square mr-2 fa-lg" aria-hidden="true"></i> Add Figure
-                            </button>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        {{!-- <th scope="col">ID</th> --}}
-                                        <th scope="col">Name</th>
-                                        <th scope="col">&nbsp;</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{#each this.figure}}
-                                        <tr>
-                                            {{!-- <th scope="row">{{_id}}</th> --}}
-                                            <td class="text-capitalize">{{name}}</td>
-                                            <td class="text-right">
-                                                <form action="/category/deleteFigure/{{_id}}" method="POST" >
-                                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#{{_id}}">
-                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                    </button>
-                                                    <button type="submit" class="btn btn-sm btn-danger">
-                                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                                    </button>
-                                                </form>                                               
-                                                <div class="modal fade" id="{{_id}}" tabindex="-1" role="dialog" aria-labelledby="{{_id}}Label" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title text-primary" id="{{_id}}Label">Edit Figure</h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action="/category/updateFigure/{{_id}}" method="POST">
-                                                                    <div class="form-group">
-                                                                        <label for="{{_id}}name">Figure Name:</label>
-                                                                        <input type="text" name="name" class="form-control" id="{{_id}}name" value="{{name}}">
-                                                                    </div>
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <button type="submit" class="btn btn-primary">Update</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    {{/each}}
-                                </tbody>
-                            </table>  
-                            <!-- Modal -->
-                            <div class="modal fade" id="figureModal" tabindex="-1" role="dialog" aria-labelledby="figureModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-sm" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="figureModalLabel">New Figure</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="category/newFigure" method="POST">
-                                                <div class="form-group">
-                                                    <label for="figureName">Figure Name:</label>
-                                                    <input type="text" name="name" class="form-control" id="figureName">
-                                                </div>
-                                                <button type="submit" class="btn btn-success">Create</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>    
-                        </div>
-                    </div>
-                </div>
-              </div>
             </div>
-          </div>
+        </div>
     </div>
+</div>

@@ -16,23 +16,14 @@ router.route('/updateAttribute/:attributeID')
 router.route('/deleteAttribute/:attributeID')
     .post(categoryController.deleteAttribute);
 
-router.route('/newFigure')
-    .post(categoryController.newFigure);
+router.route('/newCardType')
+    .post(categoryController.newCardType);
 
-router.route('/updateFigure/:figureID')
-    .post(categoryController.updateFigure);
+router.route('/updateCardType/:cardTypeID')
+    .post(categoryController.updateCardType);
 
-router.route('/deleteFigure/:figureID')
-    .post(categoryController.deleteFigure);
-
-router.route('/newRace')
-    .post(categoryController.newRace);
-
-router.route('/updateRace/:raceID')
-    .post(categoryController.updateRace);
-
-router.route('/deleteRace/:raceID')
-    .post(categoryController.deleteRace);
+router.route('/deleteCardType/:cardTypeID')
+    .post(categoryController.deleteCardType);
 
 router.route('/newType')
     .post(categoryController.newType);

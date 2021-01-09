@@ -17,12 +17,13 @@ const cardRouter = require('./routes/card');
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 // Views engine
 app.engine('hbs', exphbs({ extname: 'hbs' }));
 app.set('view engine', 'hbs');
 
+app.set('img', __dirname + '/public')
 // Routes
 app.use('/', indexRouter);
 app.use('/category', categoryRouter);

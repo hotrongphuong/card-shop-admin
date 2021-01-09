@@ -54,12 +54,12 @@
                             <td>{{price}} $</td>
                             <td>{{sold}}</td>
                             <td class="text-right">
-                                <a class="btn btn-primary btn-sm" href="#" role="button">
+                                <a class="btn btn-primary btn-sm" href="/card/detail/{{_id}}" role="button">
                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                 </a>
-                                <a class="btn btn-danger btn-sm" href="#" role="button">
+                                {{!-- <a class="btn btn-danger btn-sm" href="#" role="button">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
-                                </a>
+                                </a> --}}
                             </td>
                         </tr>
                         {{/each}}
@@ -68,5 +68,4 @@
             </div>
         </div>
     </div>
-
 </div>
