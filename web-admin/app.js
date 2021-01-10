@@ -2,6 +2,7 @@ const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const express = require('express');
 const logger = require('morgan');
+const path = require('path')
 require('express-async-errors');
 
 const db = require('./config/db');
@@ -17,7 +18,7 @@ const cardRouter = require('./routes/card');
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.normalize(__dirname + '/../public')));
 
 // Views engine
 app.engine('hbs', exphbs({ extname: 'hbs' }));

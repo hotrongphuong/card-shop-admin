@@ -19,7 +19,10 @@ const CardSchema = Schema({
         type: Date,
         default: Date.now()
     },
-    image: { type: String }
+    image: { 
+        type: String,
+        default: "no-image.png"
+    }
 });
 
 const Card = mongoose.model('Card', CardSchema);

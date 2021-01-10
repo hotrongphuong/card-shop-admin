@@ -1,35 +1,37 @@
 {{> navbar}}
 
-<div class="container">
-    <div class="row mt-4">
+<div class="container mt-4">
+    <div class="row">
         <div class="col-sm-12">
             <div class="card">
-                <div class="card-header d-flex justify-content-between">
-                    <h5>New Card</h5>
-                </div>
+                <h5 class="card-header">Details</h5>
                 <div class="card-body">
-                    <form action="" enctype="multipart/form-data" method="post">
+                    <form action="/card/update/{{card._id}}" enctype="multipart/form-data" method="post" onsubmit="checkForm()">
                         <div class="form-row d-flex justify-content-between">
                             <div class="form-group col-sm-6">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control form-control-sm" id="name" name="name">
+                                <input type="text" class="form-control form-control-sm intext" id="name" name="name"
+                                    placeholder="{{card.name}}">
                             </div>
                             <div class="form-group col-sm-2">
                                 <div class="form-group">
                                     <label for="price">Price($)</label>
-                                    <input type="text" class="form-control form-control-sm" id="price" name="price">
+                                    <input type="text" class="form-control form-control-sm intext" id="price"
+                                        name="price" placeholder="{{card.price}}">
                                 </div>
                             </div>
                             <div class="form-group col-sm-2">
                                 <div class="form-group">
                                     <label for="atk">ATK</label>
-                                    <input type="text" class="form-control form-control-sm" id="atk" name="atk">
+                                    <input type="text" class="form-control form-control-sm intext" id="atk" name="atk"
+                                        placeholder="{{card.atk}}">
                                 </div>
                             </div>
                             <div class="form-group col-sm-2">
                                 <div class="form-group">
                                     <label for="def">DEF</label>
-                                    <input type="text" class="form-control form-control-sm" id="def" name="def">
+                                    <input type="text" class="form-control form-control-sm intext" id="def" name="def"
+                                        placeholder="{{card.def}}">
                                 </div>
                             </div>
                         </div>
@@ -38,8 +40,9 @@
                                 <label for="cardType">Card-Type</label>
                                 <select class="form-control form-control-sm rounded-0 my-2 text-capitalize"
                                     name="cardType" id="cardType">
-                                    {{#each this.cardType}}
-                                    <option class="text-capitalize" value="{{_id}}">{{name}}</option>
+                                    <option selected disabled hidden id="sCardType"> {{card.cardType}} </option>
+                                    {{#each this.cardTypes}}
+                                    <option class="text-capitalize sCcardType" value="{{_id}}">{{name}}</option>
                                     {{/each}}
                                 </select>
                             </div>
@@ -47,7 +50,8 @@
                                 <label for="attribute">Attribute</label>
                                 <select class="form-control form-control-sm rounded-0 my-2 text-capitalize"
                                     name="attribute" id="attribute">
-                                    {{#each this.attribute}}
+                                    <option selected disabled hidden id="">{{card.attribute}}</option>
+                                    {{#each this.attributes}}
                                     <option class="text-capitalize" value="{{_id}}">{{name}}</option>
                                     {{/each}}
                                 </select>
@@ -57,7 +61,8 @@
                                     <label for="type">Type</label>
                                     <select class="form-control form-control-sm rounded-0 my-2 text-capitalize"
                                         name="type" id="type">
-                                        {{#each this.type}}
+                                        <option selected disabled hidden> {{card.type}} </option>
+                                        {{#each this.types}}
                                         <option class="text-capitalize" value="{{_id}}">{{name}}</option>
                                         {{/each}}
                                     </select>
@@ -69,23 +74,50 @@
                                     <label for="level">Level</label>
                                     <select class="form-control form-control-sm rounded-0 my-2 text-capitalize"
                                         name="level" id="level">
+                                        <option selected disabled hidden> {{card.level}} </option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="description">Desription</label>
-                            <textarea class="form-control" rows="3" id="description" name="description" required></textarea>
+                            <textarea class="form-control intext" rows="3" id="description" name="description"
+                                placeholder="{{card.description}}"></textarea>
                         </div>
-                        <div class="form-group col-sm-4">
-                            <label for="image">Input Image Card</label>
-                            <input type="file" class="form-control-file mx-2" id="image" name="image">
+                        <div class="form-row d-flex justify-content-start mt-4">
+                            <div class="form-group col-sm-2 col-3">
+                                <img src="/img/{{card.image}}" alt="{{card.name}}-img" class="img-thumbnail">
+                                
+                            </div>
+                            <div class="form-group col-sm-4 col-6 ml-3">
+                                <label for="image">Input Image Card Replace</label>
+                                <input type="file" class="form-control-file" id="image" name="image">
+                            </div>
+                            
                         </div>
-                        <input type="submit" class="btn btn-success" value="Create">
+                        <div class="form-row mt-3">
+                            <a href="/card" class="btn btn-secondary mx-3" role="button">Exit</a>
+                            <input type="submit" class="btn btn-success mx-3" value="Update">
+                            <a href="/card/delete/{{card._id}}" class="btn btn-danger mx-3" role="button">Delete</a>
+                        </div>
                     </form>
-                </div>
 
+
+                </div>
             </div>
         </div>
+
     </div>
 </div>
+
+<script>
+    function checkForm() {
+        const inputTexts = document.getElementsByClassName("intext");
+        for (let index in inputTexts) {
+            if (inputTexts[index].value == "" || inputTexts[index].value == null) {
+                inputTexts[index].disabled = true;
+            }
+        }
+        return true;
+    }
+</script>
