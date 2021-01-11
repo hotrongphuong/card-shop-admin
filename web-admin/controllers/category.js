@@ -1,6 +1,6 @@
 const Attribute = require('../models/Attribute');
-const Type = require('../models/CardType');
-const CardType = require('../models/Type');
+const Type = require('../models/Type');
+const CardType = require('../models/CardType');
 
 const index = async (req, res, next) => {
     const attribute = await Attribute.find({}).lean().exec();

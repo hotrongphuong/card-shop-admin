@@ -24,7 +24,7 @@ app.use(express.static(path.normalize(__dirname + '/../public')));
 app.engine('hbs', exphbs({ extname: 'hbs' }));
 app.set('view engine', 'hbs');
 
-app.set('img', __dirname + '/public')
+
 // Routes
 app.use('/', indexRouter);
 app.use('/category', categoryRouter);
