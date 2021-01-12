@@ -2,23 +2,35 @@ const Card = require('../models/Card');
 const CardType = require('../models/CardType');
 const Attribute = require('../models/Attribute');
 const Type = require('../models/Type');
+const setView =require('../config/setView');
 
 module.exports = {
     index: async (req, res, next) => {
-        let page = 1;
-        if (parseInt(req.query.page) > 0) {
-            page = parseInt(req.query.page);
-        }
-        const perPage = 12;
-        const startCard = (page - 1) * perPage;
-        const ensCard = startCard + perPage;
+        const cardType = await CardType.find({}).lean().exec();
+        const attribute = await Attribute.find({}).lean().exec();
+        const type = await Type.find({}).lean().exec();
+
         const cards = await Card.find({}).lean().exec();
-        console.log(cards);
         res.render('card', {
-            cards: cards.slice(startCard, ensCard),
-            sumCard: cards.length,
-            page: page
+            cardType,
+            attribute,
+            type,
+            cards: cards.slice(0, 12),
+            numCard: cards.length
         });
+    },
+
+    page: async (req, res, next) => {
+        const  page = req.params.indexPage;
+        console.log(page);
+        const cards = await Card.find({}).lean().exec();
+        res.send(cards.splice((page - 1) * 12, page * 12));
+    },
+
+    search: async (req, res, next) => {
+        const data = req.params.key;
+        const cards = await Card.find({name: {$regex: data, $options: "$i"}}).lean().exec();
+        res.send(cards);
     },
 
     detail: async (req, res, next) => {
@@ -27,7 +39,6 @@ module.exports = {
         const cardType = await CardType.findById(card.cardType).lean().exec();
         const attribute = await Attribute.findById(card.attribute).lean().exec();
         const type = await Type.findById(card.type).lean().exec();
-        console.log(card);
         res.render('detail', {
             card,
             cardType,

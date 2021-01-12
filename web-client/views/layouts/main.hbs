@@ -11,7 +11,7 @@
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
     <!-- Google fonts-->
     <link rel="stylesheet"
@@ -59,19 +59,16 @@
             // pls don't forget to change to your domain :)
             injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg');
 
-            $(document).ready(function () {
-                const now = parseInt($("#now").text());
-                $("#pre").attr("href", "/card?page=" + (now - 1));
-                $("#next").attr("href", "/card?page=" + (now + 1));
-            });
-
         </script>
-    
+
         <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
-        {{!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
-            integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> --}}
+        {{!--
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+            integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        --}}
     </div>
-    
+
 </body>
 
 </html>
+
