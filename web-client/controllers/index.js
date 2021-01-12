@@ -10,5 +10,13 @@ module.exports = {
         res.render('home', {
             cards
         });
+    },
+
+    getCard: async (req, res, next) => {
+        const cardID = req.query.id;
+        console.log(cardID);
+        const card = await Card.findById(cardID).lean().exec();
+        console.log(card);
+        res.send(card);
     }
 }
