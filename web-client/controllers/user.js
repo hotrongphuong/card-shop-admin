@@ -18,11 +18,13 @@ module.exports.getSignupPage = async(req, res, next) => {
 
 module.exports.logout = async(req, res, next) => {
     req.logout();
-    res.redirect('users/login');
+    res.redirect('/');
 }
 
 module.exports.login = async(req, res, next) => {
     //user = 
+    const {userContext} = req;
+
     passport.authenticate('local', async(err, user, info) => {
         if (err) {
             return next(err)
@@ -34,8 +36,7 @@ module.exports.login = async(req, res, next) => {
                 if (err) {
                     return next(err);
                 }
-                
-                res.redirect('/');
+                res.redirect('/?message=success');
             });
         }
     })(req, res, next);
