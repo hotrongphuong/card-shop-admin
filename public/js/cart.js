@@ -19,10 +19,10 @@ function getHTMLCart(item) {
     console.log(item);
     let HTML =  '   <tr>  '  + 
     '       <th class="pl-0 border-light" scope="row">  '  + 
-    '           <div class="media align-items-center"><a class="reset-anchor d-block animsition-link" href="/card/' + item._id + '"><img  '  + 
+    '           <div class="media align-items-center"><a class="reset-anchor d-block animsition-link" href="/card/detail/' + item._id + '"><img  '  + 
     '                       src="img/' + item.image + '" width="70" /></a>  '  + 
     '               <div class="media-body ml-3"><strong class="h6"><a class="reset-anchor animsition-link"  '  + 
-    '                           href="detail.html">' + item.name + '</a></strong></div>  '  + 
+    '                           href="/card/detail/' + item._id + '">' + item.name + '</a></strong></div>  '  + 
     '           </div>  '  + 
     '       </th>  '  + 
     '       <td class="align-middle border-light">  '  + 

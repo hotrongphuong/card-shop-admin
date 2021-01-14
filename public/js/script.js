@@ -44,3 +44,9 @@ function subAmount(id) {
     $("#total-" + id).text(amountNow * price);
 }
 
+// Phan trang san pham
+
+$(document).on("click", ".page", function() {
+    $.ajax()
+});
+
