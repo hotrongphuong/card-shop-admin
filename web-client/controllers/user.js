@@ -18,11 +18,13 @@ module.exports.getSignupPage = async(req, res, next) => {
 
 module.exports.logout = async(req, res, next) => {
     req.logout();
-    res.redirect('users/login');
+    res.redirect('/');
 }
 
 module.exports.login = async(req, res, next) => {
     //user = 
+    const {userContext} = req;
+
     passport.authenticate('local', async(err, user, info) => {
         if (err) {
             return next(err)
@@ -34,19 +36,12 @@ module.exports.login = async(req, res, next) => {
                 if (err) {
                     return next(err);
                 }
-                
-                res.redirect('/');
+                res.redirect('/?message=success');
             });
         }
     })(req, res, next);
 }
 
-// module.exports.login = function(res, req, next){
-//     passport.authenticate('local', {successRedirect: '/users/profile', failureRedirext: '/users/login', failureFlash: true}),
-//     function(req, res){
-//         res.redirect('/users/profile');
-//     }
-// }
 
 module.exports.signup = async(req, res, next) => {
     try {
@@ -69,28 +64,6 @@ module.exports.signup = async(req, res, next) => {
         throw e;
     }
 }
-
-// module.exports.login = function(req, res, next){
-//     var fullname = req.body.fullname;
-//     var email = req.body.email;
-//     var username = req.body.username;
-//     var password = req.body.password;
-
-//     var error = req.validationErrors();
-    
-//     if (errors){
-//         res.render('register',{
-//             errors: errors
-//         });
-//     }else{
-//         var newUser = new User({
-//             fullname: fullname,
-//             email: email,
-//             username: username,
-
-//         });
-//     }
-// };
 
 module.exports.getProfilePage = async(req, res, next) => {
     //res.send('Đã đăng nhập thành công, đây là trang profile');
