@@ -49,25 +49,31 @@
                 <!-- SHOP SIDEBAR-->
                 <div class="col-lg-3 order-2 order-lg-1">
                     <h5 class="text-uppercase mb-4">Categories</h5>
-                    <select class="form-control form-control-sm my-4">
-                        <option class="text-info" selected disabled hidden> Card-Type</option>
+                    <select class="form-control form-control-sm my-4" id="cardType">
+                        <option class="text-info" value="" selected hidden> Card-Type</option>
                         {{#each this.cardType}}
                         <option class="text-capitalize sCcardType" value="{{_id}}">{{name}}</option>
                         {{/each}}
                     </select>
-                    <select class="form-control form-control-sm my-4">
-                        <option class="text-info" selected disabled hidden> Attribute</option>
+                    <select class="form-control form-control-sm my-4" id="attribute">
+                        <option class="text-info" value="" selected hidden> Attribute</option>
                         {{#each this.attribute}}
                         <option class="text-capitalize sCcardType" value="{{_id}}">{{name}}</option>
                         {{/each}}
                     </select>
-                    <select class="form-control form-control-sm my-4">
-                        <option class="text-info" selected disabled hidden> Type</option>
+                    <select class="form-control form-control-sm my-4" id="type">
+                        <option class="text-info" value="" selected hidden> Type</option>
                         {{#each this.type}}
                         <option class="text-capitalize sCcardType" value="{{_id}}">{{name}}</option>
                         {{/each}}
                     </select>
-                    <h6 class="text-uppercase my-3">Level</h6>
+                    <select class="form-control form-control-sm my-4" id="level">
+                        <option class="text-info" value="" selected hidden> Level</option>
+                        
+                    </select>
+
+                    <button type="button" class="btn btn-secondary" id="filter">Filter</button>
+                    {{!-- <h6 class="text-uppercase my-3">Level</h6>
                     <div class="custom-control custom-checkbox mb-1">
                         <input class="custom-control-input" id="customCheck1" type="checkbox">
                         <label class="custom-control-label text-small" for="customCheck1">1 - 4</label>
@@ -79,9 +85,9 @@
                     <div class="custom-control custom-checkbox mb-1">
                         <input class="custom-control-input" id="customCheck3" type="checkbox">
                         <label class="custom-control-label text-small" for="customCheck3">7 or more</label>
-                    </div>
+                    </div> --}}
 
-                    <h6 class="text-uppercase my-3">Price</h6>
+                    {{!-- <h6 class="text-uppercase my-3">Price</h6>
                     <div class="custom-control custom-radio">
                         <input class="custom-control-input" id="customRadio1" type="radio" name="customRadio">
                         <label class="custom-control-label text-small" for="customRadio1">All Listings</label>
@@ -97,7 +103,7 @@
                     <div class="custom-control custom-radio">
                         <input class="custom-control-input" id="customRadio4" type="radio" name="customRadio">
                         <label class="custom-control-label text-small" for="customRadio4">Buy It Now</label>
-                    </div>
+                    </div> --}}
                 </div>
                 <!-- SHOP LISTING-->
                 <div class="col-lg-9 order-1 order-lg-2 mb-5 mb-lg-0">
@@ -105,7 +111,7 @@
                         <div class="col-lg-8">
                             <div class="form-inline">
                                 <input class="form-control mr-sm-2" type="search" placeholder="Search"
-                                    aria-label="Search" id="input-search">
+                                    aria-label="Search" value="" id="input-search">
                                 <button class="btn btn-outline-success my-2 my-sm-0" id="btn-search">Search</button>
                             </div>
                         </div>
@@ -156,7 +162,7 @@
                     </div>
                     <div class="d-flex justify-content-center">
                         <ul class="pagination justify-content-center justify-content-lg-end" id="pagination">
-                            <li class="page-item active"><button class="page-link">1</button></li>
+                            <li class="page-item active" id="page1"><button class="page-link">1</button></li>
                         </ul>
                     </div>
 
@@ -170,6 +176,14 @@
 <script>
     let numCard = +{{numCard}};
     console.log(numCard);
+
+    {{!-- // level
+    $(document).ready(function(){
+    for(let level = 1; level <= 10; level++) {
+        const element = `<option class="text-capitalize" value="${level}">${level}</option>`;
+        $("#level").append(element);
+    } --}}
+
     // phan trang
     $(document).ready(function () {
         const numPage = Math.ceil(numCard / 12);
@@ -201,6 +215,41 @@
     }
 
     $(document).on("click", ".page-item", function () {
+        const formData = {
+            keySearch: $("#input-search").val(),
+            cardType: $("#cardType").val(),
+            attribute: $("#attribute").val(),
+            type: $("#type").val(),
+            level: $("#level").val(),
+            numPage: $(this).text()
+        };
+
+        $(".page-item").removeClass("active");
+        $(this).addClass("active");
+        $.ajax({
+            asyc: false,
+            type: "POST",
+            url: "/card/page",
+            data: formData,
+            cache: false,
+            success: function (res) {
+                $("#listCard").empty();
+                console.log(res);
+                for (let card of res) {
+                    const html = getListCardHTML(card);
+                    $("#listCard").append(html);
+                }
+            },
+            error: function () {
+                console.log('Loi');
+            }
+        });
+
+    });
+
+
+
+    {{!-- $(document).on("click", ".page-item", function () {
         $(".page-item").removeClass("active");
         const numPage = $(this).text();
         $(this).addClass("active");
@@ -224,21 +273,22 @@
             }
         });
 
-    });
+    }); --}}
 
     // Search
     $(document).on("click", "#btn-search", function () {
-        const valSearch = $("#input-search").val();
         $.ajax({
             asyc: false,
-            type: "GET",
-            url: "/card/search/" + valSearch,
+            type: "POST",
+            url: "/card/search",
+            data: { keySearch: $("#input-search").val()},
             cache: false,
             success: function (res) {
+                $("#page1").addClass("active");
                 $(".pre").remove();
                 const numPage = Math.ceil(res.length / 12);
                 for (let indexPage = 2; indexPage <= numPage; indexPage++) {
-                    var html = '<li class="page-item"><button class="page-link">' + indexPage + '</button></li>';
+                    var html = '<li class="page-item pre"><button class="page-link">' + indexPage + '</button></li>';
                     $("#pagination").append(html);
                 };
 
@@ -255,4 +305,43 @@
             }
         });
     });
+
+    // Filter
+    $(document).on("click", "#filter", function() {
+        const formData = {
+            cardType: $("#cardType").val(),
+            attribute: $("#attribute").val(),
+            type: $("#type").val(),
+            level: $("#level").val()
+        };
+
+        $.ajax({
+            asyc: false,
+            type: "POST",
+            url: "/card/filter",
+            //dataType: "text",
+            data: formData,
+            cache: false,
+            success: function (res) {
+                $("#page1").addClass("active");
+                $(".pre").remove();
+                const numPage = Math.ceil(res.length / 12);
+                for (let indexPage = 2; indexPage <= numPage; indexPage++) {
+                    var html = '<li class="page-item pre"><button class="page-link">' + indexPage + '</button></li>';
+                    $("#pagination").append(html);
+                };
+
+                $("#listCard").empty();
+                res = res.splice(0, 12);
+                console.log(res);
+                for (let card of res) {
+                    const html = getListCardHTML(card);
+                    $("#listCard").append(html);
+                }
+            },
+            error: function () {
+                console.log('Loi');
+            }
+        });
+    })
 </script>

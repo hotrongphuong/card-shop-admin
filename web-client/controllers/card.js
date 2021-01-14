@@ -2,7 +2,7 @@ const Card = require('../models/Card');
 const CardType = require('../models/CardType');
 const Attribute = require('../models/Attribute');
 const Type = require('../models/Type');
-const setView =require('../config/setView');
+
 
 module.exports = {
     index: async (req, res, next) => {
@@ -21,15 +21,55 @@ module.exports = {
     },
 
     page: async (req, res, next) => {
-        const  page = req.params.indexPage;
-        console.log(page);
-        const cards = await Card.find({}).lean().exec();
-        res.send(cards.splice((page - 1) * 12, page * 12));
+        const filter = {
+            keySearch: {$regex: req.body.keySearch, $options: "$i"}
+        };
+        const _cardType = req.body.cardType;
+        if(_cardType !== "") {
+            filter['cardType'] = _cardType;
+        };
+        const _attribute = req.body.attribute;
+        if(_attribute !== "") {
+            filter['attribute'] = _attribute;
+        };
+        const _type = req.body.type;
+        if(_type !== "") {
+            filter['type'] = _type;
+        };
+        const _level = req.body.level;
+        if(_level !== "") {
+            filter['level'] = _level;
+        }
+        const cards = await Card.find(filter).lean().exec();
+        res.send(cards.splice((numPage - 1) * 12, numPage * 12));
     },
 
     search: async (req, res, next) => {
-        const data = req.params.key;
+        const data = req.body.keySearch;
+        console.log(data);
         const cards = await Card.find({name: {$regex: data, $options: "$i"}}).lean().exec();
+        res.send(cards);
+    },
+
+    filter: async (req, res, next) => {
+        const filter = {};
+        const _cardType = req.body.cardType;
+        if(_cardType !== "") {
+            filter['cardType'] = _cardType;
+        };
+        const _attribute = req.body.attribute;
+        if(_attribute !== "") {
+            filter['attribute'] = _attribute;
+        };
+        const _type = req.body.type;
+        if(_type !== "") {
+            filter['type'] = _type;
+        };
+        const _level = req.body.level;
+        if(_level !== "") {
+            filter['level'] = _level;
+        }
+        const cards = await Card.find(filter).lean().exec();
         res.send(cards);
     },
 
