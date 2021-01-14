@@ -19,13 +19,9 @@
                 <li class="nav-item"><a class="nav-link" href="/cart"> <i
                             class="fa fa-shopping-cart mr-1 text-gray"></i>Cart</a>
                 </li>
-                {{#if userContext}}
-                <li class="nav-item"><a class="nav-link" href="#"> <i
-                            class="fas fa-user-alt mr-1 text-gray"></i>{{userContext.body.username}}</a></li>
-                {{else}}
+
                 <li class="nav-item">
-                    <a class="nav-link" id="dropdown-user" href="/users/login"> <i class="fas fa-user-alt mr-1 text-gray">
-                        </i>
+                    
                         {{#if user}}
                         <div class="dropdown show">
                             <a class="btn btn-secondary dropdown-toggle" id="login-text" href="#" role="button"
@@ -41,14 +37,15 @@
                         </div>
 
                         {{else}}
-                        <span id="login-text">
+                        <a class="nav-link" id="dropdown-user" href="/users/login"><span id="login-text"></span> <i class="fas fa-user-alt mr-1 text-gray">
+                        </i>
+                        
                             Login
                         </span>
 
                         {{/if}}
                     </a>
                 </li>
-                {{/if}}
             </ul>
         </div>
     </nav>
