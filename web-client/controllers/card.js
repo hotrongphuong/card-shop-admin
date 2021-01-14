@@ -3,6 +3,30 @@ const CardType = require('../models/CardType');
 const Attribute = require('../models/Attribute');
 const Type = require('../models/Type');
 
+function alphabet(a, b) {
+    var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
+    if (nameA < nameB) //sort string ascending
+        return -1;
+    if (nameA > nameB)
+        return 1;
+    return 0; //default return value (no sorting)
+}
+
+function priceIn(a, b) {
+    if (a.price < b.price) //sort string ascending
+        return -1;
+    if (a.price > b.price)
+        return 1;
+    return 0; //default return value (no sorting)
+}
+
+function priceIn(a, b) {
+    if (a.price > b.price) //sort string ascending
+        return -1;
+    if (a.price < b.price)
+        return 1;
+    return 0; //default return value (no sorting)
+}
 
 module.exports = {
     index: async (req, res, next) => {
@@ -20,9 +44,16 @@ module.exports = {
         });
     },
 
+    listCard: async (req, res, next) => {
+        console.log('listCard');
+        const cards = await Card.find({}).lean().exec();
+        res.send(cards);
+    },
+
     page: async (req, res, next) => {
+        const numPage = req.body.numPage;
         const filter = {
-            keySearch: {$regex: req.body.keySearch, $options: "$i"}
+            name: {$regex: req.body.keySearch, $options: "$i"}
         };
         const _cardType = req.body.cardType;
         if(_cardType !== "") {
@@ -40,7 +71,18 @@ module.exports = {
         if(_level !== "") {
             filter['level'] = _level;
         }
+        console.log(filter);
+
+        const sortType = req.body.sortType;
+
         const cards = await Card.find(filter).lean().exec();
+        if (sortType === 'sort-alphabet') {
+            cards.sort(alphabet);
+        } else if (sortType === 'sort-price-in') {
+            cards.sort(priceIn);
+        } else if (sortType === 'sort-price-de') {
+            cards.sort(priceDe);
+        }
         res.send(cards.splice((numPage - 1) * 12, numPage * 12));
     },
 

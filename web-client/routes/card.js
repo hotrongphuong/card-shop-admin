@@ -10,7 +10,7 @@ router.route('/')
 router.route('/page')
     .post(cardController.page);
 
-router.route('/:cardID')
+router.route('/detail/:cardID')
     .get(cardController.detail);
 
 router.route('/search')
@@ -19,7 +19,8 @@ router.route('/search')
 router.route('/search/:key')
     .get(cardController.search);
 
-
+router.route('/listCard')
+    .get(cardController.listCard);
 
 router.route('/filter')
     .post(cardController.filter);
