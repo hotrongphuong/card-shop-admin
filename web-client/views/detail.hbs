@@ -13,6 +13,9 @@
                 <li class="nav-item">
                     <!-- Link--><a class="nav-link" href="/card">Cards</a>
                 </li>
+                <li class="nav-item">
+                    <!-- Link--><a class="nav-link" href="/users/signup">Signup</a>
+                </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="/cart"> <i
@@ -275,7 +278,6 @@
 <script>
     const url = window.location.href;
     let user = {{{ json user }}}
-    window.history.pushState('', "Home", '/');
     if (user) {
         $('#login-text').html(user.username)
            
