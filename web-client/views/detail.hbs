@@ -1,3 +1,4 @@
+<!-- navbar-->
 <header class="header container bg-white px-0 px-lg-3">
     <nav class="navbar navbar-expand-lg navbar-light py-3 px-lg-0"><a class="navbar-brand" href="/"><span
                 class="font-weight-bold text-uppercase text-dark">Shop Monster Card</span></a>
@@ -7,17 +8,42 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <!-- Link--><a class="nav-link mr-3" href="/">Home</a>
+                    <!-- Link--><a class="nav-link active mr-3" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <!-- Link--><a class="nav-link" href="/card">Shop</a>
+                    <!-- Link--><a class="nav-link" href="/card">Cards</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="/cart"> <i
                             class="fa fa-shopping-cart mr-1 text-gray"></i>Cart</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="#"> <i class="fa fa-user mr-1 text-gray"></i>Login</a>
+
+                <li class="nav-item">
+                    
+                        {{#if user}}
+                        <div class="dropdown show">
+                            <a class="btn btn-secondary dropdown-toggle" id="login-text" href="#" role="button"
+                                id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a id="profile-btn" class="dropdown-item" href="#">Profile</a>
+                                <a id="logout-btn" class="dropdown-item" href="#">Logout</a>
+                        
+                            </div>
+                        </div>
+
+                        {{else}}
+                        <a class="nav-link" id="dropdown-user" href="/users/login"><span id="login-text"></span> <i class="fas fa-user-alt mr-1 text-gray">
+                        </i>
+                        
+                            Login
+                        </span>
+
+                        {{/if}}
+                    </a>
                 </li>
             </ul>
         </div>
@@ -243,5 +269,23 @@
     function addCartFromDetail(id) {
         const amount = $("#" + id).attr("value");
         addCardToCart(id, parseInt(amount));
+    }
+</script>
+
+<script>
+    const url = window.location.href;
+    let user = {{{ json user }}}
+    window.history.pushState('', "Home", '/');
+    if (user) {
+        $('#login-text').html(user.username)
+           
+         $('#dropdown-user').attr('href', '#');
+        $('#profile-btn').click(function(){
+            window.location.href = '/users/profile';
+        });
+        $('#logout-btn').click(function(){
+            alert('/users/logout')
+            window.location.href = '/users/logout';
+        });
     }
 </script>

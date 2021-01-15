@@ -16,14 +16,40 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="/cart"> <i
-                            class="fas fa-dolly-flatbed mr-1 text-gray"></i>Cart</a>
+                            class="fa fa-shopping-cart mr-1 text-gray"></i>Cart</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="#"> <i
-                            class="fas fa-user-alt mr-1 text-gray"></i>Login</a></li>
+
+                <li class="nav-item">
+                    
+                        {{#if user}}
+                        <div class="dropdown show">
+                            <a class="btn btn-secondary dropdown-toggle" id="login-text" href="#" role="button"
+                                id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a id="profile-btn" class="dropdown-item" href="#">Profile</a>
+                                <a id="logout-btn" class="dropdown-item" href="#">Logout</a>
+                        
+                            </div>
+                        </div>
+
+                        {{else}}
+                        <a class="nav-link" id="dropdown-user" href="/users/login"><span id="login-text"></span> <i class="fas fa-user-alt mr-1 text-gray">
+                        </i>
+                        
+                            Login
+                        </span>
+
+                        {{/if}}
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
 </header>
+
 <div class="container">
     <!-- HERO SECTION-->
     <section class="py-5 bg-light mt-4">
@@ -180,5 +206,21 @@
         return 0; //default return value (no sorting)
     }
 </script>
-
+<script>
+    const url = window.location.href;
+    let user = {{{ json user }}}
+    window.history.pushState('', "Home", '/');
+    if (user) {
+        $('#login-text').html(user.username)
+           
+         $('#dropdown-user').attr('href', '#');
+        $('#profile-btn').click(function(){
+            window.location.href = '/users/profile';
+        });
+        $('#logout-btn').click(function(){
+            alert('/users/logout')
+            window.location.href = '/users/logout';
+        });
+    }
+</script>
 <script src="/js/card.js"></script>
