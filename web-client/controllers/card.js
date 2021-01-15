@@ -20,7 +20,7 @@ function priceIn(a, b) {
     return 0; //default return value (no sorting)
 }
 
-function priceIn(a, b) {
+function priceDe(a, b) {
     if (a.price > b.price) //sort string ascending
         return -1;
     if (a.price < b.price)

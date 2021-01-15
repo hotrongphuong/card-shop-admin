@@ -1,5 +1,3 @@
-
-
 $(document).ready(function() {
     let html = "";
     const listCart = getListCart();
@@ -17,7 +15,7 @@ function getListCart() {
 
 function getHTMLCart(item) {
     console.log(item);
-    let HTML =  '   <tr>  '  + 
+    let HTML =  '   <tr id="tr-' + item._id + '">  '  + 
     '       <th class="pl-0 border-light" scope="row">  '  + 
     '           <div class="media align-items-center"><a class="reset-anchor d-block animsition-link" href="/card/detail/' + item._id + '"><img  '  + 
     '                       src="img/' + item.image + '" width="70" /></a>  '  + 
@@ -40,7 +38,7 @@ function getHTMLCart(item) {
     '       <td class="align-middle border-light">  '  + 
     '           <p class="mb-0 small">$ <span id="total-' + item._id + '">' + item.price * item.amount  + '</span></p>  '  + 
     '       </td>  '  + 
-    '       <td class="align-middle border-light"><button class="reset-anchor btn-dark" style="cursor: pointer;" onclick="deleteItem(' + item._id + ')"><i  '  + 
+    '       <td class="align-middle border-light"><button class="reset-anchor btn-dark" style="cursor: pointer;" onclick="deleteItem(\'' + item._id + '\')"><i  '  + 
     '                   class="fa fa-trash small text-white"></i></button></td>  '  + 
     '  </tr>  ' ; 
     return HTML;
@@ -63,4 +61,15 @@ function getCard(id, amount) {
             console.log('Loi');
         }
     });
+}
+
+function deleteItem(id) {
+    $('#tr-' + id).remove();
+    const list = getListCart();
+    for(let index = 0; index < list.length; index++) {
+        if (list[index].id = id) {
+            list.splice(index, 1);
+        }
+    }
+    localStorage.setItem(stograKey, JSON.stringify(list));
 }
